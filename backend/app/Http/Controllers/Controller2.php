@@ -408,98 +408,88 @@ class Controller2 extends Controller
 
     }
 
-    public function RPG_Top (){
+    public function rpg_top (){
 
-        return view('RPG_Top');
+        return view('rpg_top');
+
 
     }
 
-    public function RPG_fight (Request $request){
+//RPG風
 
-        $enemy_num = $request->select_enemy;
-        $my_hp = $request->my_hp;
-        $enemy_hp = $request->enemy_hp;
+    public function rpg_fight (Request $request){
+
+        $enemy_num = $request->select_enemy;//１回目選んだ敵の判定（プルダウンの値）
+        //$my_hp = $request->my_hp;
+        //$enemy_hp = $request->enemy_hp;
         $my_action = "";
         $enemy_action = "";
 
-        if(isset ($request->select_enemy)){
+        if(isset ($request->select_enemy)) {
             $enemy_hps = [50,90,100,80];
-            $enemy_hp = $enemy_hps[$enemy_num];
+            $enemy_hp = $enemy_hps[$enemy_num - 1];
+            $enemy = null;
             $my_hp = 200;
-        }
+        } else {
+            $enemy = $request->enemy;//１回目以降選んだ敵の判定（プルダウンの値）
+            $enemy_num = $request->enemy;
+            $enemy_hp = $request->enemy_hp;
+            $my_hp = $request->my_hp;
 
-
-
-        $battel_rand = rand(1,100);
-        for( $i==1; $i<=2; $i++){
-            if (1==$i){
-
-                if($battel_rand <= 50){
-
-                    $my_action = $battel_rand."ダメージ与えた";
-                    $enemy_hp = $enemy_hp - $battel_rand;
-        
-        
-                }elseif($battel_rand > 50 && $battel_rand <= 85){
-        
-                    $my_action = "避けた";
-        
-                }elseif($battel_rand > 85 && $battel_rand <= 100){
-        
-                    $my_action = "100ダメージ与えた";
-                }
-
-            } else {
-                if($battel_rand <= 50){
-
-                    $enemy_action = $battel_rand."ダメージ与えた";
-                    $my_hp = $y_hp - $battel_rand;
-        
-        
-                }elseif($battel_rand > 50 && $battel_rand <= 85){
-        
-                    $enemy_action = "避けた";
-        
-                }elseif($battel_rand > 85 && $battel_rand <= 100){
-        
-                    $enemy_action = "100ダメージ与えた";
-                }
-                
+            if ($my_hp <= 0) {
+                return view('rpg_game_over');
+            }
+            if ($enemy_hp <= 0) {
+                return view('rpg_clear');     
             }
             
+
+                //勇者の処理
+                $enemy_hp_b = $request->enemy_hp;
+                $enemy_rand = mt_rand(1,10);
+                $enemy_attak_rand = mt_rand(1,30);
+                if ($enemy_rand >= 1 && $enemy_rand <=5){
+                    $my_action = "勇者がモンスターに".$enemy_attak_rand."ダメージ与えた";
+                        $enemy_hp = $enemy_hp - $enemy_attak_rand;
+                } elseif ($enemy_rand >= 6 && $enemy_rand <=9) {
+                    $enemy_action = "モンスターが避けた";
+                    $my_action = "勇者はダメージを与えられなかった";
+                    $enemy_hp = $enemy_hp_b;
+                } else {
+                    $my_action = "クリティカル！！勇者がモンスターに100ダメージ与えた";
+                        $enemy_hp = $enemy_hp - 100;
+                }
+                //敵の処理
+                $my_hp_b = $request->my_hp;
+                $my_rand = mt_rand(1,10);
+                $my_attak_rand = mt_rand(1,30);
+                if ($my_rand >= 1 && $my_rand <=5){
+                    $enemy_action = "モンスターが勇者に".$my_attak_rand."ダメージ与えた";
+                        $my_hp = $my_hp - $my_attak_rand;
+                } elseif ($my_rand >= 6 && $my_rand <=9) {
+                    $my_action = "勇者は避けた";
+                    $enemy_action = "モンスターはダメージを与えられなかった";
+                    $my_hp = $my_hp_b;
+                } else {
+                    $enemy_action = "クリティカル！！モンスターが勇者に100ダメージ与えた";
+                        $my_hp = $my_hp - 100;
+                }
+
         }
-        if ($my_hp == null) {
-            return view('game_over');
-        }
-        if ($enemy_hp == null) {
-            return view('game_clear');     
-        }
+
         
-/*
-        if($battel_rand <= 50){
-
-            $my_action = $battel_rand."ダメージ与えた";
-            $enemy_hp = $enemy_hp - $battel_rand;
-
-
-        }elseif($battel_rand > 50 && $battel_rand <= 85){
-
-            $my_action = "避けた";
-
-        }elseif($battel_rand > 85 && $battel_rand <= 100){
-
-            $my_action = "100ダメージ与えた";
-        }*/
+        
 
         $data = [
             'enemy_num'=>$enemy_num,
+            'enemy'=>$enemy,
             'my_hp'=>$my_hp,
             'enemy_hp'=>$enemy_hp,
             'my_action'=>$my_action,
             "enemy_action"=>$enemy_action
         ];
 
-        return view('RPG_fight',$data);
+        return view('rpg_fight',$data);
 
     }
 
