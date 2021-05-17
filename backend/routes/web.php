@@ -56,3 +56,7 @@ Route::post('/Lucky', 'App\Http\Controllers\Controller2@Lucky');
 Route::get('/RPG_Top', 'App\Http\Controllers\Controller2@RPG_Top');
 
 Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
+//ホラーゲーム
+Route::get('/horror_top', 'App\Http\Controllers\Controller2@horror_top');
+
+Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');

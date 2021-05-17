@@ -475,21 +475,6 @@ class Controller2 extends Controller
             return view('game_clear');     
         }
         
-/*
-        if($battel_rand <= 50){
-
-            $my_action = $battel_rand."ダメージ与えた";
-            $enemy_hp = $enemy_hp - $battel_rand;
-
-
-        }elseif($battel_rand > 50 && $battel_rand <= 85){
-
-            $my_action = "避けた";
-
-        }elseif($battel_rand > 85 && $battel_rand <= 100){
-
-            $my_action = "100ダメージ与えた";
-        }*/
 
         $data = [
             'enemy_num'=>$enemy_num,
@@ -500,6 +485,41 @@ class Controller2 extends Controller
         ];
 
         return view('RPG_fight',$data);
+
+    }
+
+    public function horror_top (){
+
+        return view('horror_top');
+
+    }
+
+    public function horror_route (Request $request){
+
+        $count = $request->count;
+        $route_num = $request->route_num;
+        $route_random = rand(1,3);
+        $ghost_random = rand(1,10);
+
+        //道で進んだ数をカウント
+        $count = $count++;
+        //道で選んだ番号とランダム処理があった場合の処理
+        if ($route_num == $route_random) {
+            
+            return view('horror_3',$count);
+        }
+        if ($count >= 5) {
+
+            return view('horror_clear',$count);
+        }
+        else if(($count%2)==0){
+
+            return view('horror_2',$count);
+        } else {
+
+            return view('horror_3',$count);
+        }
+        return view('horror_route',$count);
 
     }
 
