@@ -525,7 +525,7 @@ class Controller2 extends Controller
 
             return view('horror_clear', $data);
 
-        }else if(($count % 2) == 0){
+        } else if (($count % 2) == 0) {
 
             return view('horror_route', $data);
 
@@ -542,8 +542,8 @@ class Controller2 extends Controller
 
         $count = $request->count;
         $ghost_random = mt_rand(1,10);
-        if ( $ghost_random >=  6) {
-            return view('horror_route',["count" => $count]);
+        if ($ghost_random >= 6) {
+            return view('horror_route', ["count" => $count]);
         } else {
             return view ('horror_gameover');
         }
