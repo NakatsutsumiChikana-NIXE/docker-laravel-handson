@@ -2,6 +2,7 @@
 
     <head>
         <title>horror_top</title>
+    </head>
         <body bgcolor= #333333>
             <center>
                 <h1 style="color:#ffffff">帰り道</h1>
@@ -15,5 +16,4 @@
                 <audio controls loop src="bgm1.mp3"></audio>
             </center>
         </body>
-    </head>
 </html>

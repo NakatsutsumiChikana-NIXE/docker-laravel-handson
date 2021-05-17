@@ -11,7 +11,6 @@
                 <br>
                 <a href = "/horror_top"><span style="background-color:#ffffff">もう一度挑戦</span></a>
             </div>
-
         </center>
     </body>
 </html>
