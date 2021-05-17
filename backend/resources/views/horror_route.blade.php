@@ -1,29 +1,22 @@
 <html lang="ja">
 
     <head>
-        <title>horror_top</title>
-        <body bgcolor= #fffaf0>
-            <center>
-            <h1>帰り道</h1>
-            <div><img src = "hora_1.png" width = "200" height = "300"></div>
-            
-            <form method = "post" action = "horror_route">
-                    @csrf
-                <input type = "submit" value = "右">
-             </form>
-
-             <form method = "post" action = "horror_route">
-                    @csrf
-                <input type = "submit" value = "中央">
-             </form>
-
-             <form method = "post" action = "horror_route">
-                    @csrf
-                <input type = "submit" value = "左">
-             </form>
-
-            </center>
-        </div>
-        </body>
+        <title>horror_route</title>
     </head>
+        <body bgcolor= #333333>
+            <center>
+                <span>
+                    <img src = "/hora_{{$count}}.png" width = "350" height = "550"></div>
+                
+                    <form method = "post" action = "{{ route ('horror_route') }}">
+                         @csrf
+                        <input type = "hidden" name = "count" value = "{{$count}}">
+                        <input type = "submit" name="route_button" value = "右">
+                        <input type = "submit" name="route_button" value = "中央">
+                        <input type = "submit" name="route_button" value = "左">
+                    </form>
+                </span>
+                <audio controls loop src="bgm1.mp3"></audio>
+            </center>
+        </body>
 </html>

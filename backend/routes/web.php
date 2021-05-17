@@ -57,6 +57,8 @@ Route::get('/RPG_Top', 'App\Http\Controllers\Controller2@RPG_Top');
 
 Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
 //ホラーゲーム
-Route::get('/horror_top', 'App\Http\Controllers\Controller2@horror_top');
+Route::get('/horror_top', 'App\Http\Controllers\Controller2@horror_top')->name('horror_top');
 
-Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
+Route::post('/horror', 'App\Http\Controllers\Controller2@horror_route')->name('horror_route');
+
+Route::post('/horror_danger', 'App\Http\Controllers\Controller2@horror_danger')->name('horror_danger');

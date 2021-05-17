@@ -2,18 +2,18 @@
 
     <head>
         <title>horror_top</title>
-        <body bgcolor= #008b8b>
+        <body bgcolor= #333333>
             <center>
-            <h1>帰り道</h1>
-            <div><img src = "hora_1.png" width = "350" height = "600"></div>
+                <h1 style="color:#ffffff">帰り道</h1>
+                <div><img src = "/hora_9.png" width = "550" height = "450"></div>
             
-            <form method = "post" action = "horror_route">
+                <form method = "post" action = "{{ route('horror_route') }}">
                     @csrf
-                <input type = "submit" value = "スタート">
-             </form>
-
+                    <input type = "hidden" name = "count" value = "{{$count}}">
+                    <input type = "submit" value = "スタート">
+                </form>
+                <audio controls loop src="bgm1.mp3"></audio>
             </center>
-        </div>
         </body>
     </head>
 </html>

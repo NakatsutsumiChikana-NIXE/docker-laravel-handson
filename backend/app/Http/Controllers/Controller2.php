@@ -484,43 +484,71 @@ class Controller2 extends Controller
             "enemy_action"=>$enemy_action
         ];
 
-        return view('RPG_fight',$data);
+        return view('RPG_fight', $data);
 
     }
 
     public function horror_top (){
 
-        return view('horror_top');
-
+        $count = 1;
+        return view('horror_top', ["count" => $count]);
     }
 
     public function horror_route (Request $request){
 
         $count = $request->count;
-        $route_num = $request->route_num;
-        $route_random = rand(1,3);
-        $ghost_random = rand(1,10);
+        $button_action = $request->route_button;
+        $route_random = mt_rand(1,3);
+        $ghost_random = mt_rand(1,10);
 
         //道で進んだ数をカウント
-        $count = $count++;
+        $count++;
+    
+        $data = [
+            "count" => $count
+        ];
+
+        if ($button_action == "右") {
+            $button_action = 1;
+        } elseif ($button_action == "中央") {
+            $button_action = 2;
+        } elseif ($button_action == "左") {
+            $button_action = 3;
+        }
         //道で選んだ番号とランダム処理があった場合の処理
-        if ($route_num == $route_random) {
-            
-            return view('horror_3',$count);
-        }
-        if ($count >= 5) {
+        if ($button_action == $route_random) {
 
-            return view('horror_clear',$count);
-        }
-        else if(($count%2)==0){
+            return view('horror_danger', $data);
 
-            return view('horror_2',$count);
+        }
+        if ($count >= 6) {
+
+            return view('horror_clear', $data);
+
+        }else if(($count % 2) == 0){
+
+            return view('horror_route', $data);
+
         } else {
 
-            return view('horror_3',$count);
+            return view('horror_danger', $data);
+
         }
-        return view('horror_route',$count);
+        return view('horror_route', $data);
 
     }
+
+    public function horror_danger (Request $request){
+
+        $count = $request->count;
+        $ghost_random = mt_rand(1,10);
+        if ( $ghost_random >=  6) {
+            return view('horror_route',["count" => $count]);
+        } else {
+            return view ('horror_gameover');
+        }
+
+    }
+
 
 }
