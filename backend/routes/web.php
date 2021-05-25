@@ -13,7 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome/{id}', 'App\Http\Controllers\Controller2@index')->name('profile');
+Route::get('/welcome', 'App\Http\Controllers\Controller2@index')->name('profile');
+
+Route::post('/info', 'App\Http\Controllers\Controller2@info')->name('info');
+
+Route::post('/bulletin', 'App\Http\Controllers\Controller2@bulletin')->name('bulletin');
+
+Route::post('/welcome', 'App\Http\Controllers\Controller2@delete')->name('delete');
+
 
 Route::get('/test', function () {
      return view('test');
@@ -62,3 +69,7 @@ Route::get('/horror_top', 'App\Http\Controllers\Controller2@horror_top')->name('
 Route::post('/horror', 'App\Http\Controllers\Controller2@horror_route')->name('horror_route');
 
 Route::post('/horror_danger', 'App\Http\Controllers\Controller2@horror_danger')->name('horror_danger');
+
+Route::get('book', 'BookController@index')->name('book.index');
+
+Route::post('book', 'BookController@store')->name('book.store');

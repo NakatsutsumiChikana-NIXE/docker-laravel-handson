@@ -3,6 +3,7 @@
 
     <head>
         <title>blood</title>
+    </head>
         <body bgcolor= #fffaf0>
             <center>
             <h1>本日のご飯</h1>
@@ -23,6 +24,5 @@
                     <img src= "okazu.png" width="300" height="200">
             </center>
         </bocy>
-    </head>
 </html>
 

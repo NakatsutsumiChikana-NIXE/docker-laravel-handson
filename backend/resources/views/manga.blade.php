@@ -3,13 +3,32 @@
     <head>
         <meta charset="utf-8">
         <title>Nakatsutsumi　Self-infroduction</title>
+        <style>
+            body {
+                    background-color: #7fffd4; 
+                }
+
+            h1{
+
+                color : 191970;
+
+            }
+
+            strong{
+
+                color : 191970;
+
+                }
+            
+            
+        </style>
     </head>
-        <body bgcolor= #7fffd4>
+        <body>
             <center>
                     <div align="right">
                         <img src="meramera.jpg"width="300" height="200" alt="">
                     </div>
-                    <h1><font color="191970">おすすめ漫画</h1></font>
+                    <h1>おすすめ漫画</h1>
                     <table border="1"width="300">
                         <tr>
                             <td width="300">
@@ -37,7 +56,7 @@
                             </td>
                         </tr>
                     </table>
-                    <font color="191970"><p><strong>おすすめ漫画などありましたら是非教えてください！</strong></p></font>
+                    <p><strong>おすすめ漫画などありましたら是非教えてください！</strong></p></font>
             </center>
             <a href="{{route('profile')}}"><img src="aoba.jpg"width="200" height="300" alt="クリック"></a>
             <p>↑押すと自己紹介ページへ移動</p>

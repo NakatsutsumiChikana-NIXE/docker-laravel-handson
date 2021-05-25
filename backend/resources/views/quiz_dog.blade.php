@@ -3,6 +3,7 @@
 
     <head>
         <title>quiz</title>
+    </head>
         <body bgcolor= #f5f5f5>
             <center>
                 <h1>動物クイズ</h1>
@@ -22,8 +23,5 @@
                         </dd>
                     </form>
             </center>
-
-
         </body>
-    </head>
 </html>
