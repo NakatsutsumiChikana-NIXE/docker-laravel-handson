@@ -8,13 +8,15 @@
 
             <p>名前：{{$name}}</p>
             <p>内容：{{$contents}}</p>
+            <p>パスワード：{{$psw}}</p>
             <p>お知らせ:{{$summary}}</p>
 
-            <form method = "post" action = "{{ route('info') }}">
+            <form method = "get" action = "{{ route('seve') }}">
                 @csrf
                 <input type = "hidden" name = "name" value = "{{$name}}">
                 <input type = "hidden" name = "contents" value = "{{$contents}}">
                 <input type = "hidden" name = "summary" value = "{{$summary}}">
+                <input type = "hidden" name = "psw" value = "{{$psw}}">
                     <button type = "submit">記入に間違えがない場合はボタンを押してください</button>
                 </form>
             </center>

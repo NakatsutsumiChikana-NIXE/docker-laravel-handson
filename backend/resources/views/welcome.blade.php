@@ -233,33 +233,46 @@
                 </ul>
 
             </center>
-                <form method = "post" action = "{{ route('bulletin') }}">
+            <h3>新規作成は下のボタンを押してください</h3>
+            <p>↓</p>
+            <form method = "get" action = "new">
                     @csrf
-                    <p>　　名前：<input type = "text" name = "name"></p>
-                    <p>コメント：<textarea type = "text" name = "contents" ></textarea></p>
-                    <p>お知らせ：<textarea type = "text" name = "summary" ></textarea></p>
-
-                    <button type="submit">送信</button>
+                    <button type = "submit">新規</button>
                 </form>
+
+
+                <br>
+                <p>削除処理</p>
+                <br>
                 <form method = "post" action = "{{ route('delete')}}">
-                @csrf
-                <p>何番目のコメントを削除しますか？：<input type = "integer" name = "delete_id"></p>
-                <button type = "submit">削除</button>
+                    @csrf
+                    <p>IDを入力してください：<input type = "integer" name = "delete_id"></p>
+                    <p>パスワードを入力してください：<input type = "integer" name = "delete_psw"></p>
+                    <button type = "submit">削除</button>
                 </form>
-            <center>
-            <div class="box4">
-                <div class="box-title_1">データベースから取得した値</div>
-                    <div class ="scroll">
-                        @foreach ($books as $book)
-                        <!--nameが名前、contentsがコメント、summaryが、お知らせ-->
-                            <p>ID　{{ $book->id }} : {{ $book->name }} / {{ $book->contents }} / {{$book->summary}}</p>
-                        @endforeach
-                    </div>
-                </div>
-            <div class="pager_1">
 
-                {{$products->links()}}
-            </div>
+            <center>
+                <div class="box4">
+                    <div class="box-title_1">データベースから取得した値</div>
+                        <div class ="scroll">
+                            @foreach ($products as $book)
+                                <form method = "get" action = "change">
+                                    @csrf
+                                <!--nameが名前、contentsがコメント、summaryが、お知らせ-->
+                                    <p>ID　{{ $book->id }} : {{ $book->name }} / {{ $book->contents }} / {{$book->summary}}　<button type = "submit">変更</button></p>
+                                    <input type = "hidden" name = "id" value = "{{ $book->id }}">
+                                    <input type = "hidden" name = "page" value = "{{$products->currentPage()}}">
+                                </form>
+                            @endforeach
+
+                        </div>
+                    </div>
+                    <p>現在{{$products->currentPage()}}ページです</p>
+                    {{$error}}
+                    <!--現在いるページャーを取得-->
+                    <div class="pager_1">
+                        {{$products->links()}}
+                </div>
             </center>
             
             <a href="{{route('manga')}}"><img src="bakuman.jpg" alt="クリック"></a>

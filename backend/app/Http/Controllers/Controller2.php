@@ -2,76 +2,342 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\DB;
 
 class Controller2 extends Controller
 {
-    public function index( Request $request) {
+    //ホームページ　トップページ
+    public function index(Request $request) {
 
         //ページの管理のため必要
-        $sort = $request -> sort;
-        //booksテーブルから10件取り出している
-        $products = Book::paginate(2);
-        //削除
-        $delete = $request->delete;
-        Book::where( 'id', $delete ) -> delete();
-        $test = 20;
+        $sort = $request->sort;
+        //booksテーブルから5件取り出している
+        $products = Book::paginate(5);
+
         $date = date('Y');
         $date_2 = date('m/d');
         // データベースからデータを取得してbladeに値を渡す
         $books = Book::all();
 
-        $data = [
-                    'old'=>$test,
-                    'books' => $books ,
-                    'date' => $date , 
-                    'date_2' => $date_2 ,
-                    'products' => $products ,
-                    'sort' => $sort
-                    
+        $delete_id = $request->delete_id;
+                
+        $delete_psw = $request->delete_psw;
 
+        $error= "";
+
+        //IDとpswを取得
+        $id = DB::table('books')->where('id', $delete_id )->value('id');
+        $psw = DB::table('books')->where('id', $delete_id )->value('psw');
+
+        if($id == $delete_id && $psw == $delete_psw) {
+
+            Book::where( 'id', $delete_id )->delete();
+
+
+        } elseif($id == $delete_id) {
+            $error = "ID又はパスワードが間違っています。";
+        } else {
+            $error = "ID又はパスワードが違っています。";
+        }
+
+
+        $data = [
+                    'books'=>$books ,
+                    'date'=>$date , 
+                    'date_2'=>$date_2 ,
+                    'products'=>$products ,
+                    'sort'=>$sort ,
+                    'error'=>$error
+                   
                 ];
-        return view ( 'welcome', $data);
+        return view('welcome', $data);
+    }
+    //新規作成ページ
+    public function new(Request $request) {
+
+        //ページの管理のため必要
+        $sort = $request->sort;
+        // データベースからデータを取得してbladeに値を渡す
+        $books = Book::all();
+
+        $data = [
+                    'books'=>$books ,
+                    'sort'=>$sort
+                ];
+        return view('new', $data);
     }
 
+    //変更ページ
+    public function change(Request $request) {
+
+        //idの値を取得
+        $chang_id = $request->id;
+        //ページャーの値
+        $page = $request->page;
+        //エラーメッセージ
+
+
+
+        $id = DB::table('books')->where('id', $chang_id)->value('id');//指定したメッセージのid
+        $name = DB::table('books')->where('id', $chang_id)->value('name');//名前の値
+        $contents = DB::table('books')->where('id', $chang_id)->value('contents');//コメントの値
+        $summary = DB::table('books')->where('id', $chang_id)->value('summary');//お知らせの値
+
+        $data = [
+            'id'=>$id,
+            'name'=>$name,
+            'contents'=>$contents,
+            'summary'=>$summary,
+            'page'=>$page
+        ];
+        return view('change', $data);
+    }
+
+    //変更処理
+    public function change_page(Request $request) {
+        //idの値を取得
+        $id = $request->id;
+        //名前の値を取得
+        $name = $request->name;
+        //コメントの値を取得
+        $contents = $request->contents;
+        //お知らせの値を取得
+        $summary = $request->summary;
+        //ページャーの値
+        $page = $request->page;
+        //パスワードの値
+        $delete_psw = $request->delete_psw;
+
+        //エラーコメント
+        $error = "";
+
+        $date = date('Y');
+        $date_2 = date('m/d');
+       
+        $psw = DB::table('books')->where('id', $id )->value('psw');//パスワードの値
+
+        if($delete_psw == $psw) {
+
+            if(isset($name)) {
+
+                //データベースの変更
+                DB::table('books')->where('id', $id)->update(['name' => $name]);//idの$id番目のデータを変更
+    
+            } else {
+    
+            }
+
+            if(isset($contents)) {
+
+                DB::table('books')->where('id', $id)->update(['contents' => $contents]);
+
+            } else {
+
+            }
+            if(isset($summary)) {
+
+                DB::table('books')->where('id', $id)->update(['summary' => $summary]);
+
+            } else {
+
+            }
+
+        } else {
+
+            $error = "パスワードが間違っているため変更できません";
+
+        }
+
+
+        
+        //ページの管理のため必要
+       // $sort = $request->sort;
+        //booksテーブルから２件取り出している
+        //$products = Book::paginate(5);
+        
+        //$error= "";
+        
+
+        $data = [
+
+            'date'=>$date , 
+            'date_2'=>$date_2 ,
+            //'products'=>$products ,
+            //'sort'=>$sort ,
+            'error'=>$error ,
+            'page'=>$page,
+            'name'=>$name ,
+            'contents'=>$contents ,
+            'summary'=>$summary
+            //compact('products')
+        ];
+        return view('change_answer', $data);
+
+    }
+
+        //変更した後の確認ページ
+        public function change_ansewr(Request $request) {
+
+            //idの値を取得
+            $chang_id = $request->id;
+            //ページャーの値
+            $page = $request->page;
+            //エラーコメント
+            $error = "";
+    
+            $id = DB::table('books')->where('id', $chang_id)->value('id');//指定したメッセージのid
+            $name = DB::table('books')->where('id', $chang_id)->value('name');//名前の値
+            $contents = DB::table('books')->where('id', $chang_id)->value('contents');//コメントの値
+            $summary = DB::table('books')->where('id', $chang_id)->value('summary');//お知らせの値
+            $data = [
+                'id'=>$id,
+                'name'=>$name,
+                'contents'=>$contents,
+                'summary'=>$summary,
+                'page'=>$page
+            ];
+            return view('change_answer',$data);
+        }    
+
+
+
+
+    //入力があっているのかの確認ページ
     public function bulletin(Request $request) {
         $name = $request->name;
         $contents = $request->contents;
         $summary = $request->summary;
-
+        $psw = $request->password;
         
+
+        $data = [
+
+            'name'=>$name ,
+            'contents'=>$contents ,
+            'summary'=>$summary ,
+            'psw'=>$psw
+        ];
+        return view('bulletin', $data);
+
     }
 
 
+    
+
+    //ホームページで書き込まれた値を保存する
+    public function seve(Request $request){
+        $date = date('Y');
+        $date_2 = date('m/d');
+
+        //ページの管理のため必要
+        $sort = $request->sort;
+        //booksテーブルから10件取り出している
+         $products = Book::paginate(2);
+        
+        //新しいレコードの追加
+        $booksModel = new Book;
+        $saveData = $request->all();
+        $booksModel->fill($saveData)->save();
+        $books = Book::orderBy('id', 'desc')->get();
+        $sort = $request->sort;
+        $products = Book::paginate(3);
+
+        $delete_id = $request->delete_id;
+                
+        $delete_psw = $request->delete_psw;
+
+        $error= "";
+
+        //IDとpswを取得
+        $id = DB::table('books')->where('id', $delete_id )->value('id');
+        $psw = DB::table('books')->where('id', $delete_id )->value('psw');
+
+        if($id == $delete_id && $psw == $delete_psw) {
+
+            Book::where( 'id', $delete_id )->delete();
+
+
+        }elseif($id != $delete_id) {
+            $error = "ID又はパスワードが間違っています。";
+        }elseif($psw != $$delete_psw) {
+            $error = "ID又はパスワードが違っています。";
+        }
+
+
+        $data = [
+
+            'books'=>$books,
+            'product'=>$products,
+            'sort'=>$sort,
+            'date'=>$date, 
+            'date_2'=>$date_2,
+            'products'=>$products ,
+            'error'=>$error
+
+        ];
+        return view('welcome',$data);
+    }
+
+
+    //削除の処理
     public function delete(Request $request) {
 
                 //ページの管理のため必要
-                $sort = $request -> sort;
+                $sort = $request->sort;
                 //booksテーブルから10件取り出している
                 $products = Book::paginate(2);
-                //削除
-                $delete = $request->delete_id;
-                Book::where( 'id', $delete ) -> delete();
                 //日にち
-                $test = 20;
                 $date = date('Y');
                 $date_2 = date('m/d');
+
+                //newからのデータ
+                $name = $request->name;
+                $contents = $request->contents;
+                $summary = $request->summary;
+        
+                //削除
+                $delete_id = $request->delete_id;
+                
+                $delete_psw = $request->delete_psw;
                 // データベースからデータを取得してbladeに値を渡す
                 $books = Book::all();
-        
+                $error= "";
+
+                //IDとpswを取得
+                $id = DB::table('books')->where('id', $delete_id )->value('id');
+                $psw = DB::table('books')->where('id', $delete_id )->value('psw');
+
+                if($id == $delete_id && $psw == $delete_psw) {
+
+                    Book::where( 'id', $delete_id )->delete();
+
+
+                } elseif($id == $delete_id) {
+                    $error = "ID又はパスワードが間違っています。";
+                } else {
+                    $error = "ID又はパスワードが違っています。";
+                }
+
                 $data = [
-                            'old'=>$test,
-                            'books' => $books ,
-                            'date' => $date , 
-                            'date_2' => $date_2 ,
-                            'products' => $products ,
-                            'sort' => $sort
-                            
+                    'books'=>$books ,
+                    'date'=>$date , 
+                    'date_2'=>$date_2 ,
+                    'products'=>$products ,
+                    'sort'=>$sort ,
+                    'error'=>$error,
+                    'summary'=>$summary ,
+                    'contents'=>$contents ,
+                    'name'=>$name
+
+                ];
+
         
-                        ];
-                return view ( 'welcome', $data);
+                return view('new_answer' , $data);
         
 
             }
+
+
 
 
     public function manga() {

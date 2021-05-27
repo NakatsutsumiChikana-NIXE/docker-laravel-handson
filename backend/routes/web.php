@@ -12,12 +12,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//ホームページ作成
 Route::get('/welcome', 'App\Http\Controllers\Controller2@index')->name('profile');
 
-Route::post('/info', 'App\Http\Controllers\Controller2@info')->name('info');
+Route::get('/new', 'App\Http\Controllers\Controller2@new')->name('new');
+
+Route::post('/new_answer', 'App\Http\Controllers\Controller2@new_answer')->name('new_answer');
 
 Route::post('/bulletin', 'App\Http\Controllers\Controller2@bulletin')->name('bulletin');
+
+Route::get('/seve', 'App\Http\Controllers\Controller2@seve')->name('seve');
+
+Route::get('/change', 'App\Http\Controllers\Controller2@change')->name('change');
+
+Route::put('/change_page', 'App\Http\Controllers\Controller2@change_page')->name('change_page');
+
+Route::put('/change_ansewr', 'App\Http\Controllers\Controller2@change_ansewr')->name('change_ansewr');
 
 Route::post('/welcome', 'App\Http\Controllers\Controller2@delete')->name('delete');
 
