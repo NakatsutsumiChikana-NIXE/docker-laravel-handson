@@ -95,8 +95,18 @@ Route::post('book', 'BookController@store')->name('book.store');
 //追加課題DBに質問を入れて管理
 //topページ
 Route::get('/question_top', 'App\Http\Controllers\QuestionController@question_top')->name('question_top');
+//saveから戻った時用
+Route::put('/question_top', 'App\Http\Controllers\QuestionController@question_top')->name('question_top');
+
 //問題作成ページ
-Route::post('/question_create', 'App\Http\Controllers\QuestionController@question_create')->name('question_create');
+Route::get('/question_create', 'App\Http\Controllers\QuestionController@question_create')->name('question_create');
+//save
+Route::put('/question_save', 'App\Http\Controllers\QuestionController@question_save')->name('question_save');
+
 //問題出題ページ
-Route::post('/question_page', 'App\Http\Controllers\QuestionController@question_page')->name('question_page');
+Route::post('/question_display', 'App\Http\Controllers\QuestionController@question_display')->name('question_display');
+
+Route::post('/question_answer', 'App\Http\Controllers\QuestionController@question_answer')->name('question_answer');
+
+Route::post('/correct_answer_rate', 'App\Http\Controllers\QuestionController@correct_answer_rate')->name('correct_answer_rate');
 

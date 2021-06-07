@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\Question;
 use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
@@ -8,7 +9,14 @@ class QuestionController extends Controller
 
     Public function question_top (Request $request) {
 
-                return view('question_top');
+        $count = 1;
+        $data = [
+
+            'count'=>$count
+
+        ];
+        
+        return view('question_top', $data);
             
 
     }
@@ -17,7 +25,16 @@ class QuestionController extends Controller
 
     Public function question_create (Request $request) {
 
-                return view('question_create');
+        $count = $request->count;
+
+        $data = [
+
+            'count'=>$count
+
+        ];
+
+
+                return view('question_create', $data);
             
 
     }
@@ -26,7 +43,7 @@ class QuestionController extends Controller
 
         $questionModel = new Question;
         $saveData = $request->all();
-        $questionModel = fill($saveData)->save();
+        $questionModel->fill($saveData)->save();
         $questions = Question::orderBy('id', 'desc')->get();
 
         return view('question_top');
@@ -35,39 +52,49 @@ class QuestionController extends Controller
     }
 
 
-    Public function question_page($id , Request $request) {
+    Public function question_display(Request $request) {
 
-        switch($id) {
+        $count = $request->count;
+        $answer = $request->answer;
+
+        
+        if ($count <= 10) {
+
+            $contents = Question::where('id', $count)->value('contents');
+            $message = Question::where('id', $count)->value('message');
+            $answer = Question::where('id', $count)->value('answer');
+
+            $data = [
+
+                    'contents'=>$contents ,
+                    'message'=>$message ,
+                    'answer'=>$answer,
+                    'count'=>$count
+
+            ];
+
+            return view('question_display', $data);
+
+        } else {
+
+            return view('correct_answer_rate');
+            
+        }
     
-            case 1:
-                $question_name = Question::where('id', $id)->value('question_name');
-                $question_message = Question::where('id', $id)->value('question_message');
-                $question_answer = Question::where('id', $id)->value('question_answer');
-    
-                $data = [
-
-                        'question_name'=>$question_name ,
-                        'question_message'=>$question_message ,
-                        'question_answer'=>$question_answer
-
-                ];
-                return view('question_1', $data);
-                break;
     }
     
-    }
     
-    
-    public function question_answer ($id , Request $request) {
+    public function question_answer ( Request $request) {
 
-        $id = $request->id;
-        $player_answer = $request->radio_box;
-        $question_answer = $request->question_answer;
+        $answer = $request->answer;
         $result_message = "";
+        $gender = $request->gender;
+
     
         $count = 1;
     
-        if($player_answer == $question_answer) {	
+        if ($answer == $gender) {	
+
             $result_message = "正解";
     
         } else {
@@ -85,6 +112,22 @@ class QuestionController extends Controller
             return view('question_answer', $data);
     
         }
+
+        Public function correct_answer_rate (Request $request) {
+            $answer = $request->answer;
+
+            $data = [
+
+
+            ];
+
+
+
+            return view('correct_answer_rate');
+    
+    
+        }
+    
     
     
 }

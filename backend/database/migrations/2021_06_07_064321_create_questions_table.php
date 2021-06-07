@@ -15,11 +15,10 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->string("contents")->comment('問題の内容');
+            $table->string("message")->comment('問題文の選択肢');
+            $table->integer("answer")->comment('問題の答え');
             $table->timestamps();
-            $table->string("question_contents")->comment('問題の内容');
-            $table->string("question_message")->comment('問題文の選択肢');
-            $table->string("qquestion_answer")->comment('問題の答え');
-
         });
     }
 
