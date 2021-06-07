@@ -36,7 +36,7 @@
                      }
 
             }
-            @media screen and (min-width: 480px) and ( max-width:1440px){
+            @media screen and (min-width:480px) and (max-width:1440px){
 
                 ul {
                         padding: 0;

@@ -30,6 +30,15 @@ Route::put('/change_page', 'App\Http\Controllers\Controller2@change_page')->name
 Route::put('/change_ansewr', 'App\Http\Controllers\Controller2@change_ansewr')->name('change_ansewr');
 
 Route::post('/welcome', 'App\Http\Controllers\Controller2@delete')->name('delete');
+//new掲示板
+Route::get('/bulletin_board', 'App\Http\Controllers\Bulletin_boardController@bulletin_board')->name('bulletin_board');
+
+Route::post('/save', 'App\Http\Controllers\Bulletin_boardController@save')->name('save');
+
+Route::post('/verification', 'App\Http\Controllers\Bulletin_boardController@verification')->name('verification');
+
+Route::post('/uplopad', 'App\Http\Controllers\Bulletin_boardController@uplopad')->name('uplopad');
+
 
 
 Route::get('/test', function () {
@@ -38,7 +47,7 @@ Route::get('/test', function () {
 
 Route::get('/manga', 'App\Http\Controllers\Controller2@manga')->name('manga');
 
-Route::get('/calc', 'App\Http\Controllers\Controller2@calc');
+Route::get('/calc', 'App\Http\Controllers\Controller2@calc')->name('calc');
 
 Route::post('/total', 'App\Http\Controllers\Controller2@total');
 
@@ -83,3 +92,11 @@ Route::post('/horror_danger', 'App\Http\Controllers\Controller2@horror_danger')-
 Route::get('book', 'BookController@index')->name('book.index');
 
 Route::post('book', 'BookController@store')->name('book.store');
+//追加課題DBに質問を入れて管理
+//topページ
+Route::get('/question_top', 'App\Http\Controllers\QuestionController@question_top')->name('question_top');
+//問題作成ページ
+Route::post('/question_create', 'App\Http\Controllers\QuestionController@question_create')->name('question_create');
+//問題出題ページ
+Route::post('/question_page', 'App\Http\Controllers\QuestionController@question_page')->name('question_page');
+

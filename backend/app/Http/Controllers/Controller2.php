@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Speak;
 use Illuminate\Support\Facades\DB;
 
 class Controller2 extends Controller
@@ -26,8 +27,8 @@ class Controller2 extends Controller
         $error= "";
 
         //IDとpswを取得
-        $id = DB::table('books')->where('id', $delete_id )->value('id');
-        $psw = DB::table('books')->where('id', $delete_id )->value('psw');
+        $id = Book::where('id', $delete_id )->value('id');
+        $psw = Book::where('id', $delete_id )->value('psw');
 
         if($id == $delete_id && $psw == $delete_psw) {
 
@@ -78,10 +79,10 @@ class Controller2 extends Controller
 
 
 
-        $id = DB::table('books')->where('id', $chang_id)->value('id');//指定したメッセージのid
-        $name = DB::table('books')->where('id', $chang_id)->value('name');//名前の値
-        $contents = DB::table('books')->where('id', $chang_id)->value('contents');//コメントの値
-        $summary = DB::table('books')->where('id', $chang_id)->value('summary');//お知らせの値
+        $id =Book::where('id', $chang_id)->value('id');//指定したメッセージのid
+        $name = Book::where('id', $chang_id)->value('name');//名前の値
+        $contents = Book::where('id', $chang_id)->value('contents');//コメントの値
+        $summary = Book::where('id', $chang_id)->value('summary');//お知らせの値
 
         $data = [
             'id'=>$id,
@@ -337,7 +338,8 @@ class Controller2 extends Controller
 
             }
 
-
+    
+        
 
 
     public function manga() {
