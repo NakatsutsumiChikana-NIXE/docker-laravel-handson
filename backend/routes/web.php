@@ -100,6 +100,8 @@ Route::put('/question_top', 'App\Http\Controllers\QuestionController@question_to
 
 //問題作成ページ
 Route::get('/question_create', 'App\Http\Controllers\QuestionController@question_create')->name('question_create');
+Route::put('/question_create', 'App\Http\Controllers\QuestionController@question_create')->name('question_create');
+
 //save
 Route::put('/question_save', 'App\Http\Controllers\QuestionController@question_save')->name('question_save');
 
@@ -109,4 +111,8 @@ Route::post('/question_display', 'App\Http\Controllers\QuestionController@questi
 Route::post('/question_answer', 'App\Http\Controllers\QuestionController@question_answer')->name('question_answer');
 
 Route::post('/correct_answer_rate', 'App\Http\Controllers\QuestionController@correct_answer_rate')->name('correct_answer_rate');
+
+Route::get('/question_production_verification', 'App\Http\Controllers\QuestionController@question_production_verification')->name('question_production_verification');
+//編集
+Route::put('/question_edit', 'App\Http\Controllers\QuestionController@question_edit')->name('question_edit');
 
