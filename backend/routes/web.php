@@ -116,3 +116,7 @@ Route::get('/question_production_verification', 'App\Http\Controllers\QuestionCo
 //編集
 Route::put('/question_edit', 'App\Http\Controllers\QuestionController@question_edit')->name('question_edit');
 
+
+//テスト用
+Route::get('/test', 'App\Http\Controllers\TestController@test')->name('test');
+Route::put('/test', 'App\Http\Controllers\TestController@post')->name('post');
