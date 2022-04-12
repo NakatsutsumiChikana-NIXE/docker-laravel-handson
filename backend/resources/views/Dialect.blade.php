@@ -2,6 +2,7 @@
 
     <head>
         <title>Lucky_color</title>
+    </head>
         <body bgcolor= #fffaf0>
             <center>
             <h1>南部弁クイズ</h1>
@@ -25,5 +26,4 @@
             </center>
         </div>
         </body>
-    </head>
 </html>

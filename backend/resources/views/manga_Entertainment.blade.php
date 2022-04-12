@@ -3,6 +3,7 @@
 
     <head>
         <title>title_Everyday</title>
+    </head>
         <body bgcolor= #ffffe0>
         <center>
         <h1>ギャグ漫画</h1>
@@ -17,8 +18,5 @@
             <p>・ハコヅメ～交番女子の逆襲～</p>
             <img src= "hakozume.jpeg" width="100" height="150">
         </center>
-            
-
         </body>
-    </head>
 </html>

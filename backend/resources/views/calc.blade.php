@@ -3,6 +3,7 @@
 
     <head>
         <title>Calc</title>
+    </head>
         <body>
                 <form method = "post" action = "/total">
                 @csrf
@@ -21,5 +22,4 @@
                     <input type = "submit">
                 </form>
         </body>
-    </head>
 </html>

@@ -3,6 +3,7 @@
 
     <head>
         <title>blood</title>
+    </head>
         <body bgcolor= #fffaf0>
             <center>
             <h1>血液型別性格</h1>
@@ -22,6 +23,5 @@
                     <img src= "ketueki.jpeg" width="300" height="200">
             </center>
         </bocy>
-    </head>
 </html>
 

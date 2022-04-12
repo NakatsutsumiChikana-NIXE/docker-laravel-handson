@@ -3,6 +3,7 @@
 
     <head>
         <title>blood_O</title>
+    </head>
         <body bgcolor= #fffaf0>
         <img src= "type_o.jpeg" width="300" height="200">
         <div style="padding: 9px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px;">
@@ -17,5 +18,4 @@
         </div>
         <h2>当てはまったものはありましたか？</h2>
         </body>
-    </head>
 </html>

@@ -19,8 +19,6 @@
             <p>・SPYFAMILY</p>
             <img src= "spy.jpeg" width="100" height="150">
         </center>
-            
-
         </body>
     </head>
 </html>

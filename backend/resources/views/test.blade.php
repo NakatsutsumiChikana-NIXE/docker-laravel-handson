@@ -1,7 +1,12 @@
 <!DOCTYPE>
 <html lang="ja">
-<head>
-    <body>
-        <p>こんにちは</p>
+    <head>
+        <meta charset="utf-8">
+        <title>Nakatsutsumi　Self-infroduction</title>
+        <link >
+    </head>
+    
+    <h1 class="text-primary">Hello</h1>
+        
     </body>
-</head>
+</html>
