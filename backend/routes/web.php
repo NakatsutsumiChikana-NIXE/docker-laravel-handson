@@ -53,6 +53,6 @@ Route::get('/Lucky_color', 'App\Http\Controllers\Controller2@Lucky_color');
 
 Route::post('/Lucky', 'App\Http\Controllers\Controller2@Lucky');
 
-Route::get('/RPG_Top', 'App\Http\Controllers\Controller2@RPG_Top');
+Route::get('/rpg_top', 'App\Http\Controllers\Controller2@rpg_top');
 
-Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
+Route::post('/rpg_fight', 'App\Http\Controllers\Controller2@rpg_fight');

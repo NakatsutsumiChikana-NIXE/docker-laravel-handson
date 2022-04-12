@@ -6,11 +6,10 @@
             <center>
             <span><img src = "enemy1.png" width = "200" height = "300"><img src = "enemy2.png"width = "200" height = "300">
             <img src = "enemy3.png"width = "200" height = "300"><img src = "enemy4.png"width = "200" height = "300"></span>
-            <form method = "post" action = "RPG_fight">
+            <form method = "post" action = "/rpg_fight">
                     @csrf
                         <dd>
                             <select name="select_enemy">
-                                <option>選択してください</option>
                                 <option value="1">スライム</option>
                                 <option value="2">九尾</option>
                                 <option value="3">ゴーレム</option>
