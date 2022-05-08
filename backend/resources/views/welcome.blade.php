@@ -6,7 +6,6 @@
     </head>
         <body bgcolor= #6495ed>
             <center>
-                {{$old}}
                 <div style="background:#7fffd4;
                 background-image: radial-gradient(#fff 10%,taransparent 10%);
                 background-size:10px 10px; background-position: 0 0, 10px
