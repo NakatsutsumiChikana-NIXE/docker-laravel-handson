@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 
 class Controller2 extends Controller
 {
-    public function index( Request $request , $test ) {
+    public function index( Request $request) {
         //dd($test);
-        return view ( 'welcome' , ['old'=>$test] );
+        return view ('welcome');
     }
 
     public function manga() {
@@ -15,7 +15,7 @@ class Controller2 extends Controller
     }
 
     public function calc(Request $request) {
-        return view ( 'calc');
+        return view ('calc');
     }
 
     public function total(Request $request){

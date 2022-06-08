@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome/{id}', 'App\Http\Controllers\Controller2@index')->name('profile');
+Route::get('/welcome', 'App\Http\Controllers\Controller2@index')->name('profile');
 
 Route::get('/test', function () {
      return view('test');
@@ -56,3 +56,6 @@ Route::post('/Lucky', 'App\Http\Controllers\Controller2@Lucky');
 Route::get('/RPG_Top', 'App\Http\Controllers\Controller2@RPG_Top');
 
 Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
+
+Route::get('/Setup', 'App\Http\Controllers\TwitterPseudoController@Setup')->name('Setup');
+Route::post('/SetupConfirmation', 'App\Http\Controllers\TwitterPseudoController@Confirmation')->name('Confirmation');

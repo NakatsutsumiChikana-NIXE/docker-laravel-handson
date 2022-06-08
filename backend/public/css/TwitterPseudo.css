@@ -1,0 +1,10 @@
+@charset "utf-8"; /*文字コードの指定*/
+
+.gemefont {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.textarea {
+    width: 300px;
+    height: 10em;
+    }
