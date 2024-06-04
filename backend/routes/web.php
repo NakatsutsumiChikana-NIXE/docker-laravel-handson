@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome/{id}', 'App\Http\Controllers\Controller2@index')->name('profile');
+Route::get('/welcome', 'App\Http\Controllers\Controller2@index')->name('profile');
 
 Route::get('/test', function () {
      return view('test');
