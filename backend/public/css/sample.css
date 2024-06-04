@@ -1,0 +1,56 @@
+h1 {
+    color: rgb(216, 243, 8);
+}
+
+.test {
+    color: rgb(216, 243, 8);
+}
+
+nav {
+    width: 100%;
+    height: 70px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    right:0;
+    background-color:rgba(255, 248, 220, 0.507);
+}
+ul {
+    display: flex;
+    justify-content:flex-end; /* 右寄せにしている */
+}
+li {
+    list-style: none;
+}
+
+a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin-right: 35px;
+  }
+
+a::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #000000;
+    bottom: -1px;               /*アンダーラインがaタグの下端から現れる*/
+    transform: scale(0, 1);     /*アンダーラインの縮尺比率。ホバー前はx方向に0*/
+    transform-origin: left top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の左端*/
+    transition: transform 0.3s; /*変形の時間*/
+}
+    
+a:hover::after {
+    transform: scale(1, 1);     /*ホバー後、x軸方向に1（相対値）伸長*/
+}
+
+.menu_position {
+    right: 50;
+}
+
+.position_test {
+    text-align:right;
+}
