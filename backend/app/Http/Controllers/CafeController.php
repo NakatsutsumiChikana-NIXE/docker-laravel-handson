@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 /**
  * テスト用ホームページ
- * 美容院のホームページ
+ * カフェのホームページ
 */
 class CafeController extends Controller
 {
@@ -17,7 +17,6 @@ class CafeController extends Controller
 
     public function menu()
     {
-        // dd('止まる');
         return view('cafe/menu');
     }
 }

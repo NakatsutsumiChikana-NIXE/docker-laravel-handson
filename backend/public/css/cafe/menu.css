@@ -18,14 +18,9 @@
     background-color: #666666; /*下線の色*/
 }
 
-.menu1 {
+.menu {
     width: 400px;
-}
-.menu1-position {
-    width: 400px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
+    height: 400px;
 }
 
 header {
