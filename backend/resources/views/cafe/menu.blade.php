@@ -52,22 +52,6 @@
                 </div>
                 <div class="col-sm-4"></div>
             </div>
-            {{-- <div class="menu-position" style="right: 1450px;">
-                <img class="menu" src="/cafe/menu1.jpg" alt="日替わりランチ" />
-                <p class="text-center pt-3">日替わりランチ</p>
-            </div>
-            <div class="menu-position" style="right: 1000px;">
-                <img class="menu" src="/cafe/menu2.jpg" alt="タルト" />
-                <p class="text-center pt-3">タルト</p>
-            </div>
-            <div class="menu-position" style="right: 550px;">
-                <img class="menu" src="/cafe/menu3.jpg" alt="キャラメルマキアート" />
-                <p class="text-center pt-3">キャラメルマキアート</p>
-            </div>
-            <div class="menu-position" style="right: 550px;">
-                <img class="menu" src="/cafe/menu4.jpg" alt="レモンティー" />
-                <p class="text-center pt-3">レモンティー</p>
-            </div> --}}
         </div>
     </body>
 </html>
