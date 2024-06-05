@@ -1,0 +1,34 @@
+.menu-border {
+    display: inline-block;
+    position: relative;
+}
+
+.menu-border:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px; /*下線の上下位置調整*/
+    display: inline-block;
+    width: 120px; /*下線の幅*/
+    height: 2px; /*下線の太さ*/
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%); /*位置調整*/
+    background-color: #666666; /*下線の色*/
+}
+
+.menu1 {
+    width: 400px;
+}
+.menu1-position {
+    width: 400px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+header {
+    background: url('/cafe/cafe2.jpg') center / cover;
+    height: 250px;
+}

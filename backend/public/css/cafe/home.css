@@ -1,0 +1,7 @@
+body {
+    background-image: url('/cafe/cafe.jpg');
+    background-repeat: no-repeat;
+    background-size: 1900px 1300px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+}

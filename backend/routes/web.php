@@ -59,3 +59,8 @@ Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
 
 Route::get('/Setup', 'App\Http\Controllers\TwitterPseudoController@Setup')->name('Setup');
 Route::post('/SetupConfirmation', 'App\Http\Controllers\TwitterPseudoController@Confirmation')->name('Confirmation');
+
+Route::get('/beauty_salon_top', 'App\Http\Controllers\BeautySalonController@top');
+
+Route::get('/cafe_top', 'App\Http\Controllers\CafeController@home');
+Route::get('/cafe_menu', 'App\Http\Controllers\CafeController@menu')->name('menu');

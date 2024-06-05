@@ -1,0 +1,49 @@
+nav {
+    width: 100% !important;
+    height: 70px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    right:0;
+    background-color:rgb(166 166 166 / 24%);
+    width: 550px;
+}
+ul {
+    display: flex;
+    justify-content:flex-end; /* 右寄せにしている */
+}
+li {
+    list-style: none;
+}
+
+a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(0, 0, 0) !important;
+    margin-right: 35px;
+  }
+
+.a-underline-none {
+    text-decoration:none;
+}
+
+a::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #000000;
+    bottom: -1px;               /*アンダーラインがaタグの下端から現れる*/
+    transform: scale(0, 1);     /*アンダーラインの縮尺比率。ホバー前はx方向に0*/
+    transform-origin: left top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の左端*/
+    transition: transform 0.3s; /*変形の時間*/
+}
+    
+a:hover::after {
+    transform: scale(1, 1);     /*ホバー後、x軸方向に1（相対値）伸長*/
+}
+
+a:hover {
+    text-decoration: none;
+}
