@@ -64,3 +64,12 @@ Route::get('/beauty_salon_top', 'App\Http\Controllers\BeautySalonController@top'
 
 Route::get('/cafe_top', 'App\Http\Controllers\CafeController@home');
 Route::get('/cafe_menu', 'App\Http\Controllers\CafeController@menu')->name('menu');
+
+// 学習用 管理者画面login画面
+Route::get('/cafe_administrator/login', 'App\Http\Controllers\administrator\CafeAdministratorController@login');
+// 書き込み画面
+Route::post('/cafe_administrator', 'App\Http\Controllers\administrator\CafeAdministratorController@write');
+// 管理者 アカウント作成画面
+Route::get('/cafe_administrator/create_account', 'App\Http\Controllers\administrator\CafeAdministratorController@create')->name('create');
+// 登録処理
+Route::post('/cafe_administrator/registration', 'App\Http\Controllers\administrator\CafeAdministratorController@registration');

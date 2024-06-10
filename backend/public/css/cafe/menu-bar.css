@@ -7,10 +7,12 @@ nav {
     background-color:rgb(166 166 166 / 24%);
     width: 550px;
 }
+
 ul {
     display: flex;
     justify-content:flex-end; /* 右寄せにしている */
 }
+
 li {
     list-style: none;
 }
