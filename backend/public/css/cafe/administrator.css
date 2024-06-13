@@ -14,3 +14,25 @@
     width: 500px;
     height: 50px;
 }
+
+.pr-45 {
+    padding-right: 45px;
+}
+
+.pr-15 {
+    padding-right: 15px;
+}
+
+.birthday {
+    width: 183px;
+}
+
+.mx-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.contact-card {
+    width: 900px;
+    margin: 0 auto;
+}

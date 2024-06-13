@@ -3,20 +3,28 @@
 namespace App\Services;
 
 use App\Models\CafeAdministrator;
-use Illuminate\Support\Facades\Validator;
+use App\Models\CafeContact;
+use App\Models\CafeNews;
 use Symfony\Component\HttpFoundation\Response as StatusCode;
 
 class RegistrationService
 {
     public function saveAccount(object $targetData)
     {
-        // CafeAdministratorモデルを呼び出す 変数作る;
         $cafeAdministrator = new CafeAdministrator();
-        // 引数から必要な値を取得する
         $accountInfor = $targetData->all();
-        // 社員IDを作成する →これはメソッドを作ってもいいかも (理由: 一つのメソッドで複数のことをやるのはあまり得策ではないから)
+        // 社員IDを作成
         $employeeId = self::createEmployeeId($accountInfor['birthday'], $accountInfor['sex']);
-        // 取得した値をそれぞれ 変数へ入れる
+        // 名前と社員IDが一致していたら困るので一致しているデータがあるか見る
+        $existingData = $cafeAdministrator->searchIdAndNameMatch($employeeId, $accountInfor['name']);
+
+        // nullじゃないということは名前と社員IDが一致しているデータが存在するということ
+        if (isset($existingData)) {
+            $employeeId = self::createEmployeeId($accountInfor['birthday'], $accountInfor['sex']);
+            // 名前と社員IDが一致していたら困るので一致しているデータがあるか見る
+            $existingData = $cafeAdministrator->searchIdAndNameMatch($employeeId, $accountInfor['name']);
+        }
+
         $cafeAdministrator->employee_id = $employeeId;
         $cafeAdministrator->name = $accountInfor['name'];
 
@@ -36,10 +44,10 @@ class RegistrationService
     }
 
     // 社員ID作成
-    private function createEmployeeId($birthday, $sex)
+    public function createEmployeeId($birthday, $sex)
     {
         $dateSubdivision = explode("-", $birthday);
-        // 社員IDは誕生日と性別を使って6桁0埋めで作成 sprintfで、できそうな気がする
+        // 社員IDは誕生日と性別を使って作成
         $baseEmployeeId = $dateSubdivision[1].$dateSubdivision[2].$sex.rand(1, 9);
         $employeeId = sprintf('%07d', $baseEmployeeId);
         return $employeeId;
@@ -64,12 +72,66 @@ class RegistrationService
         $password = $targetData['password'];
 
         $cafeAdministrator = new CafeAdministrator();
-        $loginData = $cafeAdministrator->searchForLoginData($employeeId, $accountName, $password);
+        $loginData = $cafeAdministrator->searchData($employeeId, $accountName, $password);
 
         if (is_null($loginData)) {
             return ['errMsgMortgages' => '存在しないアカウントのようです。もう一度社員ID・アカウント名・パスワードを見直して入力し直してください'];
         }
 
         return true;
+    }
+
+    // ユーザーを探してユーザー情報を取得してくる
+    public function searchForUsers($targetId)
+    {
+        $cafeAdministrator = new CafeAdministrator();
+        $userData = $cafeAdministrator->searchBasedOnId($targetId);
+        $dataToPass = [
+            'employee_id' => $userData['employee_id'],
+            'name' => $userData['name'],
+            'password' => $userData['password'],
+        ];
+
+        return $dataToPass;
+    }
+
+    // 業務連絡のデータを探す
+    public function searchForBusinessContacts()
+    {
+        $cafeContact = new CafeContact;
+        $businessCommunications = $cafeContact->getBusinessCommunications();
+
+        // 一度もデータを保存したことがない場合は空文字を入れてあげる
+        if (is_null($businessCommunications)) {
+            $businessCommunications = '';
+        }
+
+        return collect($businessCommunications);
+    }
+
+    // お知らせ内容を探す
+    public function searchForNotifications()
+    {
+        $cafeNews = new CafeNews;
+        $notice = $cafeNews->getNotice();
+
+        if (is_null($notice)) {
+            $notice = '';
+        }
+
+        return collect($notice);
+    }
+
+    // bladeに渡すデータ作る
+    public function createData($userData)
+    {
+        $employeeId = $userData['employee_id'];
+        $accountName = $userData['name'];
+        $password = $userData['password'];
+
+        $cafeAdministrator = new CafeAdministrator();
+        $loginData = $cafeAdministrator->searchData($employeeId, $accountName, $password);
+
+        return $loginData->id;
     }
 }
