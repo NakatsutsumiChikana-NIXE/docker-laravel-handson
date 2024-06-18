@@ -1,0 +1,44 @@
+.access-border {
+    display: inline-block;
+    position: relative;
+}
+
+.access-border:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px; /*下線の上下位置調整*/
+    display: inline-block;
+    width: 120px; /*下線の幅*/
+    height: 2px; /*下線の太さ*/
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translate(-50%); /*位置調整*/
+    background-color: #666666; /*下線の色*/
+}
+
+.left-and-right-margin {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.map-position {
+    position: absolute;
+    top: 250px;
+    left: 900px;
+}
+
+.store-name {
+    width: 300px;
+    position: absolute;
+    left: 400px;
+    top: 300px;
+}
+
+.sub-title {
+    font-size: 1.375rem;
+    padding: 0 8px 8px;
+    border-bottom: 2px #0bd solid;
+    font-weight: normal;
+}

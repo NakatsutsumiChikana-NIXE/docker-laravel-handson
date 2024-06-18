@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ContactCreateService;
 use App\Services\ContactDeleteService;
 use App\Services\ContactEditService;
+use App\Services\Administrator\ReviewsService;
 use App\Services\NoticeService;
 use App\Services\RegistrationService;
 use Illuminate\Http\Request;
@@ -128,9 +129,10 @@ class CafeAdministratorController extends Controller
     public function createNotice(Request $request)
     {
         $dataAll = $request->all();
+
         if (!empty($dataAll['newNotice'] ?? '')) {
             $noticeService = new NoticeService();
-            $dataAll = $noticeService->noticeSave($dataAll);
+            $dataAll = $noticeService->noticeSave($request);
         }
 
         return view('cafe/administrator/createNotice', ['userData' => $dataAll['userId']]);
@@ -140,9 +142,10 @@ class CafeAdministratorController extends Controller
     public function editNotice(Request $request)
     {
         $dataAll = $request->all();
-        // dd($dataAll);
+
         $noticeService = new NoticeService();
         $editNotice = $dataAll['editNotice'] ?? '';
+
         // editNoticeが存在していないかったらannounceEditingUpcomingが動く
         $dataToBeEdited = empty($editNotice) ? $noticeService->announceEditingUpcoming($dataAll) : $noticeService->noticeEdit($dataAll);
 
@@ -162,22 +165,76 @@ class CafeAdministratorController extends Controller
 
         if (!empty($dataAll['deleteId'] ?? '')) {
             $displayData = $noticeService->noticeDelete($dataAll);
-            // dd($displayData);
+
             return view('cafe/administrator/administrator', [
                 'userData' => $displayData['userId'],
                 'businessContacts' => $displayData['businessContacts'],
                 'notices' => $displayData['notices']
             ]);
         }
-        // dd('出た');
+
         $dataToBeDeleted = $noticeService->searchNoticeDelete($dataAll);
-        // dd($dataToBeDeleted);
+
         return view('cafe/administrator/deleteNotice', [
             'userId' => $dataToBeDeleted['userId'],
             'userAndCommentId' => $dataToBeDeleted['userAndCommentId'],
             'author' => $dataToBeDeleted['author'],
             'changer' => $dataToBeDeleted['changer'],
             'noticeContent' => $dataToBeDeleted['noticeContent']
+        ]);
+    }
+
+    // お客さんのレビュー
+    public function reviews(Request $request)
+    {
+        $allData = $request->all();
+        $reviewsService = new ReviewsService();
+        $reviews = $reviewsService->searchReviews($allData);
+
+        return view('cafe/administrator/reviews', ['reviews' => $reviews, 'userId' => $allData['userId']]);
+    }
+
+    // レビュー削除
+    public function reviewsDelete(Request $request)
+    {
+        $allData = $request->all();
+        $reviewsService = new ReviewsService();
+
+        if (!empty($allData['startDelete'] ?? '')) {
+            $displayData = $reviewsService->reviewDelete($allData);
+
+            if (empty($displayData['deleteId'] ?? '')) {
+                return view('cafe/administrator/administrator', [
+                    'userData' => $displayData['userId'],
+                    'businessContacts' => $displayData['businessContacts'],
+                    'notices' => $displayData['notices']
+                ]);
+            }
+
+            $allData = $displayData;
+        }
+
+        $dataScheduledForDeletion = $reviewsService->findReviewsToBeDeleted($allData);
+
+        return view('cafe/administrator/reviewsDelete', [
+            'userId' => $dataScheduledForDeletion['userId'],
+            'deleteId' => $dataScheduledForDeletion['deleteId'],
+            'nickname' => $dataScheduledForDeletion['nickname'],
+            'reviewComment' => $dataScheduledForDeletion['reviewComment'],
+            'levelOfSatisfaction' => $dataScheduledForDeletion['levelOfSatisfaction']
+        ]);
+    }
+
+    // 削除済みレビュー
+    public function deletedReview(Request $request)
+    {
+        $allData = $request->all();
+        $reviewsService = new ReviewsService();
+        $displayData = $reviewsService->viewDeletedReviews();
+
+        return view('cafe/administrator/deletedReview', [
+            'userId' => $allData['userId'],
+            'deletedReviews' => $displayData
         ]);
     }
 }

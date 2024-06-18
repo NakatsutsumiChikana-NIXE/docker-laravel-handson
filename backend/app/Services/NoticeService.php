@@ -11,13 +11,22 @@ use Symfony\Component\HttpFoundation\Response as StatusCode;
 class NoticeService
 {
     // 新規お知らせのセーブ
-    public function noticeSave($baseData)
+    public function noticeSave($request)
     {
+        $baseData = $request->all();
+
         $userIdOfUpdater = $baseData['userData'];
         $cafeAdministrator = new CafeAdministrator();
         $userData = $cafeAdministrator->searchBasedOnId($userIdOfUpdater);
 
-        $info = self::createInfoData($userData, $baseData['newNotice']);
+        // 保存対象の画像があるか
+        if ($request->hasFile('image')) {
+            // 画像保存
+            $imagePath = $request->file('image')->store('uploads', 'public');
+        }
+        
+        $info = self::createInfoData($userData, $baseData['newNotice'], $imagePath);
+
         $cafeNews = new CafeNews();
         $cafeNews->info = $info;
         $cafeNews->save();
@@ -26,7 +35,7 @@ class NoticeService
     }
 
     // 新規お知らせのセーブデータを作成する
-    private function createInfoData($userData, $newNotice)
+    private function createInfoData($userData, $newNotice, $imagePath)
     {
         // 投稿者
         $newInfo['author'] = $userData->name;
@@ -34,6 +43,8 @@ class NoticeService
         $newInfo['noticeContent'] = $newNotice;
         // 投稿者の社員ID
         $newInfo['authorEmployeeId'] = $userData->employee_id;
+        // アップされた画像
+        $newInfo['image'] = $imagePath;
 
         return $newInfo;
     }

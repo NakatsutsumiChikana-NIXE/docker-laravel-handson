@@ -66,6 +66,12 @@ Route::get('/beauty_salon_top', 'App\Http\Controllers\BeautySalonController@top'
 Route::get('/cafe_top', 'App\Http\Controllers\CafeController@home');
 // メニュー
 Route::get('/cafe_menu', 'App\Http\Controllers\CafeController@menu')->name('menu');
+// お知らせ
+Route::get('/cafe_news', 'App\Http\Controllers\CafeController@news');
+// アクセス方法
+Route::get('/cafe_access', 'App\Http\Controllers\CafeController@access');
+// 口コミ
+Route::post('/cafe_reviews', 'App\Http\Controllers\CafeController@reviews');
 
 // 学習用 管理者画面login画面
 Route::get('/cafe_administrator/login', 'App\Http\Controllers\administrator\CafeAdministratorController@login');
@@ -87,3 +93,9 @@ Route::post('/cafe_administrator/create_notice', 'App\Http\Controllers\administr
 Route::post('/cafe_administrator/edit_notice', 'App\Http\Controllers\administrator\CafeAdministratorController@editNotice');
 // お知らせ削除
 Route::post('/cafe_administrator/delete_notice', 'App\Http\Controllers\administrator\CafeAdministratorController@deleteNotice');
+// お客さんのレビュー
+Route::post('/cafe_administrator/reviews', 'App\Http\Controllers\administrator\CafeAdministratorController@reviews');
+// お客さんのレビューを削除
+Route::post('/cafe_administrator/reviews_delete', 'App\Http\Controllers\administrator\CafeAdministratorController@reviewsDelete');
+// 削除したレビューを確認
+Route::post('/cafe_administrator/deleted_review', 'App\Http\Controllers\administrator\CafeAdministratorController@deletedReview');

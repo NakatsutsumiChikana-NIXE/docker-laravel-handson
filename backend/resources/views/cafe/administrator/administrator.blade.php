@@ -25,8 +25,24 @@
                 </form>
             </div>
         </div>
-        <div>
+        <div class="mb-3">
             @include('layout.notice', ['userId' => $userData, 'notices' => $notices])
+        </div>
+        <div class="text-right">
+            <div class="review-flex">
+                <div style="margin-left: 1525px;">
+                    <form method="post" action="/cafe_administrator/deleted_review">
+                        @csrf
+                        <button class="btn btn-primary" name="userId" value="{{ $userData }}">削除したレビューを確認</button>
+                    </form>
+                </div>
+                <div class="pl-3">
+                    <form method="post" action="/cafe_administrator/reviews">
+                        @csrf
+                        <button type="submit" class="btn btn-primary mr-20" name="userId" value="{{ $userData }}">レビューを確認</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>

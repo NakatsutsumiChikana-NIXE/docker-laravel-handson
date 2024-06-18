@@ -36,3 +36,28 @@
     width: 900px;
     margin: 0 auto;
 }
+
+.label-width {
+    width: 150px;
+}
+
+.review-flex {
+    display: flex;
+    align-items: center;
+}
+
+.nickname-form-size {
+    width: 700px;
+}
+
+.input-width-400 {
+    width: 400px;
+}
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}

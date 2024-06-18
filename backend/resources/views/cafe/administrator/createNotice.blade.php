@@ -27,10 +27,11 @@
                         </div>
                     </div>
                 </div>
-                <form class="mb-0" method="post" action="/cafe_administrator/create_notice">
+                <form class="mb-0" method="post" action="/cafe_administrator/create_notice" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <textarea rows="4" cols="100" name="newNotice" required></textarea>
+                        <input class="mt-2" type="file" name="image" accept="image/*">
                     </div>
                     <div class="card-footer">
                         <div class="text-right">
