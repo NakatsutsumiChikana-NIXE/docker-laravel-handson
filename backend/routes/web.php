@@ -59,3 +59,43 @@ Route::post('/RPG_fight', 'App\Http\Controllers\Controller2@RPG_fight');
 
 Route::get('/Setup', 'App\Http\Controllers\TwitterPseudoController@Setup')->name('Setup');
 Route::post('/SetupConfirmation', 'App\Http\Controllers\TwitterPseudoController@Confirmation')->name('Confirmation');
+
+Route::get('/beauty_salon_top', 'App\Http\Controllers\BeautySalonController@top');
+
+// カフェホームページ
+Route::get('/cafe_top', 'App\Http\Controllers\CafeController@home');
+// メニュー
+Route::get('/cafe_menu', 'App\Http\Controllers\CafeController@menu')->name('menu');
+// お知らせ
+Route::get('/cafe_news', 'App\Http\Controllers\CafeController@news');
+// アクセス方法
+Route::get('/cafe_access', 'App\Http\Controllers\CafeController@access');
+// 口コミ
+Route::post('/cafe_reviews', 'App\Http\Controllers\CafeController@reviews');
+
+// 学習用 管理者画面login画面
+Route::get('/cafe_administrator/login', 'App\Http\Controllers\administrator\CafeAdministratorController@login');
+// 書き込み画面
+Route::post('/cafe_administrator', 'App\Http\Controllers\administrator\CafeAdministratorController@administrator');
+// 管理者 アカウント作成画面
+Route::get('/cafe_administrator/create_account', 'App\Http\Controllers\administrator\CafeAdministratorController@create')->name('create');
+// 登録処理
+Route::post('/cafe_administrator/registration', 'App\Http\Controllers\administrator\CafeAdministratorController@registration');
+// 業務連絡作成
+Route::post('/cafe_administrator/contact_create', 'App\Http\Controllers\administrator\CafeAdministratorController@contactCreate');
+// 業務連絡編集
+Route::post('/cafe_administrator/contact_edit', 'App\Http\Controllers\administrator\CafeAdministratorController@contactEdit');
+// 業務連絡削除
+Route::post('/cafe_administrator/contact_delete', 'App\Http\Controllers\administrator\CafeAdministratorController@contactDelete');
+// お知らせ作成
+Route::post('/cafe_administrator/create_notice', 'App\Http\Controllers\administrator\CafeAdministratorController@createNotice');
+// お知らせ編集
+Route::post('/cafe_administrator/edit_notice', 'App\Http\Controllers\administrator\CafeAdministratorController@editNotice');
+// お知らせ削除
+Route::post('/cafe_administrator/delete_notice', 'App\Http\Controllers\administrator\CafeAdministratorController@deleteNotice');
+// お客さんのレビュー
+Route::post('/cafe_administrator/reviews', 'App\Http\Controllers\administrator\CafeAdministratorController@reviews');
+// お客さんのレビューを削除
+Route::post('/cafe_administrator/reviews_delete', 'App\Http\Controllers\administrator\CafeAdministratorController@reviewsDelete');
+// 削除したレビューを確認
+Route::post('/cafe_administrator/deleted_review', 'App\Http\Controllers\administrator\CafeAdministratorController@deletedReview');

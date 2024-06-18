@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSetupsTable extends Migration
+class CreateCareReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateSetupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('setups', function (Blueprint $table) {
+        Schema::create('care_reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('image_path');
-            $table->text('comment')->nullable();
-            $table->dateTime('birthday')->nullable();
+            $table->json('info')->comment('内容記載');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateSetupsTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('setups');
+        Schema::dropIfExists('care_reviews');
     }
 }

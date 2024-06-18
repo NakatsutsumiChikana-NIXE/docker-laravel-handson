@@ -1,0 +1,51 @@
+.star-rating {
+    font-size: 30px;
+}
+
+.star {
+    color: #ccc; /* 通常の星の色 */
+    cursor: pointer;
+}
+
+.star.active {
+    color: #ffcc00; /* アクティブな星の色 */
+}
+
+.left-and-right-margin {
+    width: 550px;
+    margin: 0 auto;
+}
+
+.review-position {
+    position: absolute;
+    top: 250px;
+}
+
+.label-width {
+    width: 150px;
+}
+
+.page-title {
+    font-family: 'Philosopher', serif;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.nickname-form-size {
+    width: 300px;
+}
+
+.reviewComment-form-size {
+    width: 400px;
+}
+
+.review-flex {
+    display: flex;
+    align-items: center;
+}
+
+.write-box {
+    width: 550px;
+    position: absolute;
+    left: 1300px;
+}
